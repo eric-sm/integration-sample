@@ -10,7 +10,9 @@ class MainButton extends React.Component {
 
     render() {
         if (this.state.clicked) {
-            return 'You clicked the JSX button. Good job!';
+            return (
+                <div class="alert alert-success" role="alert">You clicked the JSX button. Good job!</div>
+            );
         }
 
         return (
