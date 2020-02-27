@@ -67,10 +67,11 @@ class App extends React.Component {
         }
 
 
+        // TODO: fix the str.split hack
         function addHateGroups(str) {
             const hateGroups = [];
 
-            let lines = str.split("\n"); // split the data on newlines and store into an array of row data
+            let lines = str.split("\\n"); // split the data on newlines and store into an array of row data
             lines.shift(); // remove first row containing column titles
             lines.forEach( line => {
                 let data = line.split(","); // split on the comma in a unquoted CSV
@@ -88,11 +89,12 @@ class App extends React.Component {
                     hateGroups.push(group);
                 }
             });
-            console.log(hateGroups); // debug logging
+            // console.log(hateGroups); // debug logging
 
             return hateGroups;
         }
-        fetch("http://givz.jericsmall.com:8181/assets/splc-hate-groups.csv", {
+
+        fetch("http://givz.jericsmall.com:8181/api/splc/", {
             method: "GET",
             headers: { "Content-Type": "text/plain" }
         })
@@ -127,8 +129,8 @@ class App extends React.Component {
         })
         .then(response => response.json())
         .then((data) => {
-            console.log(data.result); // debug logging
-            console.log(data.total); // debug logging
+            // console.log(data.result); // debug logging
+            // console.log(data.total); // debug logging
             flagHateGroups(data.result, this.state.hateGroups);
             this.setState({ results: data.result, total: data.total });
         });
