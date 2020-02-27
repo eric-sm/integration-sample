@@ -118,8 +118,6 @@ class App extends React.Component {
             });
         }
 
-
-        // TODO: remove sample-givz-results.json
         fetch("http://givz.jericsmall.com:8181/api/search/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
