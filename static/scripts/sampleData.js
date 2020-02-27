@@ -1,4 +1,5 @@
-// Sample response data from Givz API call; 2nd result amended to be flagged as a hate group
+// Sample response data from Givz API call; "Glow Foundation" result amended to be flagged as a hate group for
+// development purposes only (it's not really a hate group)
 const sampleCharitySearchResponse =
     {
         "result":[
@@ -34,8 +35,7 @@ const sampleCharitySearchResponse =
             "ntee_major_group":"Philanthropy, Voluntarism & Grantmaking Foundations",
             "ntee_centile_code":"Private Independent Foundations",
             "city":"Powell",
-            "asset_amount":2940814.0,
-            "is_hate_group": true
+            "asset_amount":2940814.0
         },
         {
             "ntee_code":"O50",
@@ -53,6 +53,23 @@ const sampleCharitySearchResponse =
             "ntee_centile_code":"",
             "city":"Davidson",
             "asset_amount":0
+        },
+        {
+            "city":"Washington",
+            "street":"801 G St Nw",
+            "ntee_major_group":"",
+            "ein":"521792772",
+            "name":"Family Research Council Inc",
+            "ntee_code":"P010",
+            "dba":"",
+            "ntee_centile_code":"",
+            "asset_amount":5160875.0,
+            "zip":"20001-3729",
+            "income_amount":16071732.0,
+            "ntee_decile_code":"",
+            "tag":"Human Services",
+            "state":"DC",
+            "revenue_amount":16048141.0
         },
         {
             "ntee_code":"E86",
