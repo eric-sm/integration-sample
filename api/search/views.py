@@ -24,4 +24,13 @@ class Search(APIView):
             data = urlopen(remote, bytes(json.dumps(parameters), encoding="utf-8")).read()
             json_data = json.loads(data)
 
+            # Remove duplicate EINs
+            seen = set()
+            new_results = []
+            for charity in json_data["result"]:
+                if charity["ein"] not in seen:
+                    seen.add(charity["ein"])
+                    new_results.append(charity)
+            json_data["result"] = new_results
+
         return Response(json_data)
