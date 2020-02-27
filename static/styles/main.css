@@ -1,3 +1,8 @@
+/* TEMP */
+#admin_link {
+    visibility: hidden;
+}
+
 /* Main styles */
 * {
     font-family: Verdana, Helvetica, Arial, sans-serif;
@@ -70,7 +75,6 @@ button:focus {
 #charity_search .search_results {
     width: 50%;
     margin: auto;
-    padding-top: 15px;
     background-color: white;
 }
 
