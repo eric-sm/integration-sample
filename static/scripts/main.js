@@ -40,6 +40,7 @@ console.log(hateGroups); // debug logging
 
 
 // For the charity search results, identify any hate groups and flag as such
+// TODO: improve the matching algorithm
 sampleCharitySearchResponse.result.forEach( charity => {
     // Find potential name matches
     let potential_matches = hateGroups.find(group => {
@@ -99,8 +100,26 @@ class CharitySearchResults extends React.Component {
 }
 
 
+class App extends React.Component {
+    render() {
+        return (
+            <div id="charity_search">
+                <div id="search_input">
+                    <form>
+                        <fieldset>
+                            <input type="text" placeholder="Search charities by name or EIN" />
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div id="search_results"><CharitySearchResults results={sampleCharitySearchResponse.result} /></div>
+            </div>
+        )
+    }
+}
+
+
 
 // Display the results in the page
-const resultsElement = <CharitySearchResults results={sampleCharitySearchResponse.result} />;
-const domContainer = document.querySelector('#search_results');
-ReactDOM.render(resultsElement, domContainer);
+const domContainer = document.querySelector('#root');
+ReactDOM.render(<App />, domContainer);
