@@ -94,7 +94,7 @@ class App extends React.Component {
             return hateGroups;
         }
 
-        fetch("http://givz.jericsmall.com:8181/api/splc/", {
+        fetch("http://givz.jericsmall.com/api/splc/", {
             method: "GET",
             headers: { "Content-Type": "text/plain" }
         })
@@ -120,7 +120,7 @@ class App extends React.Component {
             });
         }
 
-        fetch("http://givz.jericsmall.com:8181/api/search/", {
+        fetch("http://givz.jericsmall.com/api/search/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(
