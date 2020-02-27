@@ -2,3 +2,7 @@
 * {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
+
+.hate-group .donate-button {
+    display: none;
+}
