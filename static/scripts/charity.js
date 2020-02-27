@@ -20,12 +20,12 @@ class Charity extends React.Component {
     render() {
         return (
             <li className={'charity ' + (this.props.charity.is_hate_group ? "hate-group alert alert-danger" : "")} onClick={this.gotoProfile}>
+                {(this.props.charity.is_hate_group ? <div className='alert_warning'>WARNING!<br/>Possible hate group per the Southern Poverty Law Center</div> : "")}
                 <div className='name'>{this.props.charity.name}</div>
-                <div className='city'>{this.props.charity.city}</div>
-                <div className='state'>{this.props.charity.state}</div>
+                <div className='city'>{this.props.charity.city},&nbsp;</div>
+                <div className='state'>{this.props.charity.state}&nbsp;|&nbsp;</div>
                 <div className='ein'>{this.props.charity.ein}</div>
-                <div className='ein'>{this.props.charity.is_hate_group}</div>
-                <div className='donate-button'>Donate</div>
+                {(this.props.charity.is_hate_group ? "" : <div className='donate-button'>Donate</div>)}
             </li>
         );
     }

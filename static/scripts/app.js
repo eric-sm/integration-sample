@@ -96,16 +96,53 @@ class App extends React.Component {
 
     render() {
         return (
-            <div id="charity_search">
-                <div id="search_input">
-                    <form>
-                        <fieldset>
-                            <input type="text" placeholder="Search charities by name or EIN" onChange={this.doSearch} />
-                        </fieldset>
-                    </form>
+            <div id="app" className="vh-100">
+                <div id="header" className="row">
+                    <div id="logo" className="col"><img src="images/logo.png" /></div>
+                    <div id="admin_link" className="col"><a href="admin/">Admin</a></div>
                 </div>
-
-                <CharitySearchResults results={this.state.results} />
+                <div id="charity_search" className="h-100">
+                    <div className="row">
+                        <div id="search_input" className="col">
+                            <div id="call_to_action">Donate to any of the 1.6 Million
+                            registered U.S. charities from one place</div>
+                            <form>
+                                <fieldset>
+                                    <input type="text" placeholder="Search charities by name or EIN" onChange={this.doSearch} />
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                     <div className="row">
+                        <div className="col">
+                            <CharitySearchResults results={this.state.results} />
+                        </div>
+                    </div>
+                </div>
+                <div id="footer" className="row">
+                    <div className="col">
+                        <div><a href="/">Home</a></div>
+                        <div><a href="https://givz.com/about">About</a></div>
+                        <div><a href="/everywhere">Everywhere</a></div>
+                        <div><a href="/faq">Support</a></div>
+                        <div><a href="/blog">Blog</a></div>
+                        <div>
+                            <a href="https://www.facebook.com/getgivz/" target="_blank" ><img height="20" src="https://givz.imgix.net/web/images/footer/facebook/image.png?auto=format&amp;ar=undefined&amp;fit=crop&amp;ixlib=react-9.0.1&amp;h=20"/></a>
+                            <a href="https://www.instagram.com/getgivz/" target="_blank"><img height="20" src="https://givz.imgix.net/web/images/footer/instagram/image.png?auto=format&amp;ar=undefined&amp;fit=crop&amp;ixlib=react-9.0.1&amp;h=20"/></a>
+                            <a href="https://www.pinterest.com/getgivz/" target="_blank"><img height="20" src="https://givz.imgix.net/web/images/footer/pinterest/image.png?auto=format&amp;ar=undefined&amp;fit=crop&amp;ixlib=react-9.0.1&amp;h=20"/></a>
+                            <a href="https://twitter.com/getgivz" target="_blank"><img height="20" src="https://givz.imgix.net/web/images/footer/twitter/image.png?auto=format&amp;ar=undefined&amp;fit=crop&amp;ixlib=react-9.0.1&amp;h=20"/></a>
+                        </div>
+                        <div>
+                            © Givz Inc. 2019
+                            &nbsp;|&nbsp;
+                            <a href="/legal/privacy-policy">Privacy Policy</a>
+                            &nbsp;|&nbsp;
+                            <a href="/legal/user-agreement">User Agreement</a>
+                            &nbsp;|&nbsp;
+                            <a href="mailto:support@givz.com" rel="noopener noreferrer" target="_self">Contact</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
