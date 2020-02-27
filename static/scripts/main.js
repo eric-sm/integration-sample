@@ -39,17 +39,8 @@ lines.forEach( line => {
 console.log(hateGroups); // debug logging
 
 
-// For the charity search results, identify any hate groups and flag as such
-// TODO: improve the matching algorithm
-sampleCharitySearchResponse.result.forEach( charity => {
-    // Find potential name matches
-    let potential_matches = hateGroups.find(group => {
-        if (group.name.includes(charity.name) || charity.name.includes(group.name)) {
-            console.log(group);
-            charity.is_hate_group = true;
-        }
-    });
-});
+
+
 
 
 // Class definition of a charity rendering for a charity from the search results
@@ -85,15 +76,10 @@ class Charity extends React.Component {
 
 // Class definition of search results for a charity search
 class CharitySearchResults extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { results: props.results };
-    }
-
     render() {
         return (
             <ol className='search-results'>
-                {this.state.results.map((result) => <Charity key={result.ein} charity={result} /> )}
+                {this.props.results.map((result) => <Charity key={result.ein} charity={result} /> )}
             </ol>
         )
     }
@@ -101,18 +87,55 @@ class CharitySearchResults extends React.Component {
 
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { results: [], page: 0, total: 0 };
+        this.doSearch = this.doSearch.bind(this);
+    }
+
+    // For the charity search results, identify any hate groups and flag as such
+    // TODO: improve the matching algorithm in flagHateGroups
+    doSearch() {
+        function flagHateGroups(results) {
+            results.forEach( charity => {
+               // Find potential name matches
+               let potential_matches = hateGroups.find(group => {
+                   if (group.name.includes(charity.name) || charity.name.includes(group.name)) {
+                       console.log(group); // debug logging
+                       charity.is_hate_group = true;
+                   }
+               });
+            });
+        }
+
+        fetch("http://givz.jericsmall.com:8181/sampleData.json", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            //body: JSON.stringify(
+            //    {"value":"glob","from_page":0,"size":5}
+            //)
+        })
+        .then(response => response.json())
+        .then((data) => {
+            console.log(data.result); // debug logging
+            console.log(data.total); // debug logging
+            flagHateGroups(data.result);
+            this.setState({ results: data.result, total: data.total });
+        });
+    }
+
     render() {
         return (
             <div id="charity_search">
                 <div id="search_input">
                     <form>
                         <fieldset>
-                            <input type="text" placeholder="Search charities by name or EIN" />
+                            <input type="text" placeholder="Search charities by name or EIN" onChange={this.doSearch} />
                         </fieldset>
                     </form>
                 </div>
 
-                <div id="search_results"><CharitySearchResults results={sampleCharitySearchResponse.result} /></div>
+                <CharitySearchResults results={this.state.results} />
             </div>
         )
     }
@@ -123,3 +146,4 @@ class App extends React.Component {
 // Display the results in the page
 const domContainer = document.querySelector('#root');
 ReactDOM.render(<App />, domContainer);
+
