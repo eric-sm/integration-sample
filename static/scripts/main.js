@@ -105,7 +105,7 @@ class App extends React.Component {
 
     // For the charity search results, identify any hate groups and flag as such
     // TODO: improve the matching algorithm in flagHateGroups
-    doSearch() {
+    doSearch(event) {
         function flagHateGroups(results, hateGroups) {
             results.forEach( charity => {
                // Find potential name matches
@@ -118,14 +118,14 @@ class App extends React.Component {
             });
         }
 
-        // TODO: restore POST and body
+
         // TODO: remove sample-givz-results.json
-        fetch("http://givz.jericsmall.com:8181/assets/sample-givz-results.json", {
-            method: "GET",
+        fetch("http://givz.jericsmall.com:8181/api/search/", {
+            method: "POST",
             headers: { "Content-Type": "application/json" },
-            //body: JSON.stringify(
-            //    {"value":"glob","from_page":0,"size":5}
-            //)
+            body: JSON.stringify(
+                {"value": event.target.value, "from_page": 0, "size": 5}
+            )
         })
         .then(response => response.json())
         .then((data) => {
